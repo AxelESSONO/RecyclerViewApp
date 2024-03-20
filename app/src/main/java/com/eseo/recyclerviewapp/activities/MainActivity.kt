@@ -1,21 +1,46 @@
-package com.eseo.recyclerviewapp
+package com.eseo.recyclerviewapp.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.GridLayoutManager
+import com.eseo.recyclerviewapp.R
+import com.eseo.recyclerviewapp.adapter.CarAdapter
+import com.eseo.recyclerviewapp.databinding.ActivityMainBinding
+import com.eseo.recyclerviewapp.model.Car
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var cars : List<Car>
+    private lateinit var carAdapter: CarAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding = DataBindingUtil.setContentView(
+            this,
+            R.layout.activity_main
+        )
+
+        carAdapter = CarAdapter()
+
+        binding.carRecycler.adapter = carAdapter
+        binding.carRecycler.layoutManager = GridLayoutManager(
+            this,
+            2
+        )
+
+
     }
 
-    /*private fun loadNewCars(){
+    private fun loadNewCars(){
         cars = listOf(
             Car(
                 "Ford Kuga",
                 "https://www.ford.fr/content/dam/guxeu/rhd/central/cars/2023-kuga/dse/billboard/ford-kuga-eu-More_Muscular-16x9-1440x810-Desktop.jpg"
-            ),Car(
+            ),
+            Car(
                 "Peugeot 2008",
                 "https://cdn.drivek.com/configurator-imgs/cars/fr/Original/PEUGEOT/2008/42691_CROSSOVER-5-DOORS/peugeot-2008-front-view.jpg"
             ),Car(
@@ -38,6 +63,6 @@ class MainActivity : AppCompatActivity() {
                 "https://cdn.motor1.com/images/mgl/vj3bv/s3/2016-citroen-c3.jpg"
             )
         )
-    }*/
+    }
 
 }
